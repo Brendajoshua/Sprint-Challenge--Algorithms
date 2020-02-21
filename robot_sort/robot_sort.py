@@ -1,3 +1,27 @@
+# Sorting plan - bubble sort
+
+# while True
+    # pick up item at current position (swap item)
+    # check if the robot can move right
+        # if it can move right, do so
+            # compare held item with the one at current position
+                # if the held item's value is greater, swap items and turn on the light
+                    # turn on light
+                    # swap
+                    # move left
+                    # swap
+                    # move right
+                # if it's the same or lesser, do nothing
+                # shift over 'None'
+        # if it can't move right, move left until reach beginning of list
+            # if None in list, swap it out
+            # if light is off
+                # the list is sorted
+                # break the loop
+            # reset light
+            # move to beginnging of list:
+            # while can still move left
+                # move left
 class SortingRobot:
     def __init__(self, l):
         """
@@ -96,9 +120,38 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        
+        while True:
+            # pick up item at current position (swap item) 
+            self.swap_item()
 
+            # check if the robot can move right
+            if self.can_move_right():
+                # if it can move right, do so
+                self.move_right()
+                # compare held item with the one at current position
+                if self.compare_item() == 1:
+                    # if the held item's value is greater, swap items and turn on the light
+                        self.set_light_on()
+                        self.swap_item()
+                    # if it's the same or lesser, don't swap
+                # shift over 'None'
+                self.move_left()
+                self.swap_item()
+                self.move_right()
+            # if it can't move right, move left until reach beginning of list
+            else:
+                # if None in list, swap it out
+                if self.compare_item() is None:
+                    self.swap_item()
+                # if light is off, the list is sorted
+                if not self.light_is_on():
+                    break
+                # reset light
+                self.set_light_off()
+                # move to beginning of list
+                while self.can_move_left():
+                    self.move_left()
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
