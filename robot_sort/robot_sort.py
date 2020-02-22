@@ -1,3 +1,27 @@
+# Sorting plan - bubble sort
+
+# while True
+    # pick up item at current position (swap item)
+    # check if the robot can move right
+        # if it can move right, do so
+            # compare held item with the one at current position
+                # if the held item's value is greater, swap items and turn on the light
+                    # turn on light
+                    # swap
+                    # move left
+                    # swap
+                    # move right
+                # if it's the same or lesser, do nothing
+                # shift over 'None'
+        # if it can't move right, move left until reach beginning of list
+            # if None in list, swap it out
+            # if light is off
+                # the list is sorted
+                # break the loop
+            # reset light
+            # move to beginnging of list:
+            # while can still move left
+                # move left
 class SortingRobot:
     def __init__(self, l):
         """
@@ -96,9 +120,33 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        
+        # Turn on light
+        self.set_light_on()
 
+        # while loop conditional using light
+        while self.light_is_on():
+        # Swap item at first position with none
+            self.swap_item()
+        # move right if possible
+            while self.can_move_right() == True:
+                self.move_right()
+        # Compare item held if larger or smaller; swap if larger
+                if self.compare_item() == 1:
+                    self.swap_item()
+        # Continue until we can't move right any more.
+
+        # Begin moving back left all the way until we reach None, which will be our first point
+            while self.can_move_left() == True and self.compare_item() is not None:
+                self.move_left()
+        # Swap items with None again 
+            self.swap_item()
+        # Can we move right? if YES, start the whole process again
+            if self.can_move_right() is not True:
+                self.set_light_off()
+            else:
+                self.move_right()
+        # if NO, turn the light off and return the list as none has been used as a marker
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
